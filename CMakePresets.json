@@ -1,0 +1,183 @@
+{
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "debug-type",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "hidden": true
+        },
+        {
+            "name": "release-type",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            },
+            "hidden": true
+        },
+        {
+            "name": "ninja-generator",
+            "generator": "Ninja",
+            "hidden": true
+        },
+        {
+            "name": "makefile-generator",
+            "generator": "Unix Makefiles",
+            "hidden": true
+        },
+        {
+            "name": "VS18-generator",
+            "generator": "Visual Studio 18 2026",
+            "hidden": true
+        },
+        {
+            "name": "VS17-generator",
+            "generator": "Visual Studio 17 2026",
+            "hidden": true
+        },
+        {
+            "name": "linux-gcc",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "/bin/gcc",
+                "CMAKE_CXX_COMPILER": "/bin/g++"
+            },
+            "hidden": true
+        },
+        {
+            "name": "msys2-mingw-gcc",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "C:/msys64/ucrt64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/msys64/ucrt64/bin/g++.exe"
+            },
+            "hidden": true
+        },
+        {
+            "name": "msvc-compiler",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            },
+            "hidden": true
+        },
+        {
+            "name": "llvm-compiler",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            },
+            "hidden": true
+        },
+        {
+            "name": "linux-gcc-ninja",
+            "inherits": [
+                "linux-gcc", 
+                "ninja-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/linux/build/debug"
+        },
+        {
+            "name": "vscode",
+            "inherits": [
+                "msys2-mingw-gcc",
+                "ninja-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/mingw/build/debug"
+        },
+        {
+            "name": "msvc-ninja",
+            "inherits": [
+                "msvc-compiler",
+                "ninja-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/msvc/build/debug"
+        },
+        {
+            "name": "msvc-VS18",
+            "inherits": [
+                "msvc-compiler",
+                "VS18-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/msvcVS18/build/debug"
+        },
+        {
+            "name": "llvm-ninja",
+            "inherits": [
+                "llvm-compiler",
+                "ninja-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/llvmNinja/build/debug"
+        },
+        {
+            "name": "llvm-makefiles",
+            "inherits": [
+                "llvm-compiler",
+                "makefile-generator",
+                "debug-type"
+            ],
+            "binaryDir": "${sourceDir}/out/llvmMake/build/debug"
+        },
+        {
+            "name": "release-mingw",
+            "inherits": [
+                "msys2-mingw-gcc",
+                "ninja-generator",
+                "release-type"
+            ],
+            "binaryDir": "${sourceDir}/out/mingw/build/release",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/mingw/install/release"
+            }
+        },
+        {
+            "name": "release-linux",
+            "inherits": [
+                "linux-gcc",
+                "ninja-generator",
+                "release-type"
+            ],
+            "binaryDir": "${sourceDir}/out/linux/build/release",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/linux/install/release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "vscode-build",
+            "configurePreset": "vscode"
+        },
+        {
+            "name": "linux-build",
+            "configurePreset": "linux-gcc-ninja"
+        },
+        {
+            "name": "msvc-ninja-build",
+            "configurePreset": "msvc-ninja"
+        },
+        {
+            "name": "msvc-VS18-build",
+            "configurePreset": "msvc-VS18"
+        },
+        {
+            "name": "llvm-ninja-build",
+            "configurePreset": "llvm-ninja"
+        },
+        {
+            "name": "llvm-make-build",
+            "configurePreset": "llvm-makefiles"
+        },
+        {
+            "name": "release-mingw-build",
+            "configurePreset": "release-mingw"
+        },
+        {
+            "name": "release-linux-build",
+            "configurePreset": "release-linux"
+        }
+    ]
+}
